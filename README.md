@@ -10,9 +10,9 @@ What should be done:
 1. Check whether deviations are true or not
 2. Check whether peaks intensity are true or not
 
-Some Markdown text with <span style="color:blue">some *blue* text</span>.
+<span style="color:red">some **This is Red Bold.** text</span>
 
-- ![#f03c15](https://placehold.it/15/f03c15/000000?text=+) `test`
+- ![#f03c15](https://placehold.it/15/f03c15/000000?text=+) 
 - ![#c5f015](https://placehold.it/15/c5f015/000000?text=+) `#c5f015`
 - ![#1589F0](https://placehold.it/15/1589F0/000000?text=+) `#1589F0`
 
