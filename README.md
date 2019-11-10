@@ -7,14 +7,9 @@ What have done:
 4. Added gaus deviation for linear background. 
 
 What should be done:
-1. Check whether deviations are true or not
-2. Check whether peaks intensity are true or not
-
 ```diff
-- text in red
-+ text in green
-! text in orange
-# text in gray
+!1. Check whether deviations are true or not
+!2. Check whether peaks intensity are true or not
 ````
 
 __Симуляція (моделювання) апаратурного спектру__
