@@ -2,8 +2,9 @@
 
 What have done:
 1. "settings.txt" file **parser module**.
-2. GUI module based on Tkinter. 
-3. Generator module generates spectrum and show it.
+2. **GUI module** based on Tkinter. 
+3. **Generator module** generates spectrum and show it.
+4. Added gaus deviation for linear background. 
 
 What should be done:
 
