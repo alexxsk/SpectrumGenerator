@@ -1,7 +1,14 @@
 from tkinter import Tk, Label, Button, Entry, IntVar, END, W, E, StringVar, messagebox 
+import parser as ps
+from generator import Generate
+import pandas as pd
 
 def generate(filename=None):
-    pass
+    Generate(filename, save="generated.png", draw=True)
+def save_to_csv(filename=None):
+    counts, bins = Generate(filename, save="generated.png", draw=False)
+    data = pd.DataFrame({'Energy' : bins[:-1], 'Intensity' : counts})
+    data.to_csv("spectrum.txt")
 
 def findInFile(filename=None, text=None):
     file = open(filename, "r+")
@@ -69,6 +76,8 @@ class GUI:
 
         self.run_button = Button(master, text=" RUN!", bg='red', 
             command=lambda: generate(self.FILENAME))
+        self.import_button = Button(master, text=" Import to spectrum.txt", bg='green', 
+            command=lambda: save_to_csv(self.FILENAME))
         
         self.add_line_button.grid(row=1, column=0)
 
@@ -113,6 +122,7 @@ class GUI:
         self.current_filename_label.grid(row=7, column=2)
 
         self.run_button.grid(row=7, column=3)
+        self.import_button.grid(row=7, column=4)
 
         # self.reset_button.grid(row=2, column=2, sticky=W+E)
     def setFile(self, new_filename=None):
@@ -161,13 +171,7 @@ class GUI:
                        f" A={float(self.enter_nachan.get())}")
             file.close()
 
-        # else: # reset
-            # self.total = 0
-
-        # self.total_label_text.set(self.total)
-        # self.entry.delete(0, END)
-
-
-root = Tk()
-my_gui = GUI(root)
-root.mainloop()
+def StartGui():
+    root = Tk()
+    my_gui = GUI(root)
+    root.mainloop()
