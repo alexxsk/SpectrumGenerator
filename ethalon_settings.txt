@@ -1,0 +1,8 @@
+LINE1 ERG=2 ITS=10000 FWHM=0.05   # Line 1  
+LINE2 ERG=3 ITS=10000 FWHM=0.07   # Line 2
+LINE3 ERG=4 ITS=30000 FWHM=0.06   # Line 3
+LINE4 ERG=5 ITS=10000 FWHM=0.03   # Line 4
+
+BKG EXP=3 A=0.4 B=0.1               # Background config
+  
+RANGE EMIN=0 EMAX=10.0 NCH=800# Spectrum detect conf.
