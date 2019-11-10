@@ -1,7 +1,11 @@
 # EDEM task 1
 
-What is done:
-1. "settings.txt" file parser.
+What have done:
+1. "settings.txt" file **parser module**.
+2. GUI module based on Tkinter. 
+3. Generator module generates spectrum and show it.
+
+What should be done:
 
 __Симуляція (моделювання) апаратурного спектру__
 
