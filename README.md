@@ -10,11 +10,12 @@ What should be done:
 1. Check whether deviations are true or not
 2. Check whether peaks intensity are true or not
 
-<span style="color:red">some **This is Red Bold.** text</span>
-
-- ![#f03c15](https://placehold.it/15/f03c15/000000?text=+) 
-- ![#c5f015](https://placehold.it/15/c5f015/000000?text=+) `#c5f015`
-- ![#1589F0](https://placehold.it/15/1589F0/000000?text=+) `#1589F0`
+```diff
+- text in red
++ text in green
+! text in orange
+# text in gray
+````
 
 __Симуляція (моделювання) апаратурного спектру__
 
