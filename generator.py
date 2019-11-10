@@ -32,6 +32,9 @@ def Generate(filename=None, delay=None, draw=False, save=None):
 
     x = np.linspace(sts.emin, sts.emax, sts.nbins)
     y = linearFunction(x, sts.bkg_a, sts.bkg_b)
+    temp_y = y + np.random.randn(sts.nbins)*10
+
+    y = [i if i > 0 else i*0 for i in temp_y]
     counts, bins = np.histogram(x, weights=y, bins=int(sts.nbins), range=(sts.emin, sts.emax))
     if histogram is None:
         histogram = counts, bins
@@ -54,6 +57,7 @@ def Generate(filename=None, delay=None, draw=False, save=None):
         histogram = histogram[0] + counts, bins
     bins_list.append(bins[:-1])
     counts_list.append(counts)
+
     if draw:
         bp.stacked(bins_list, weights=counts_list, bins=int(sts.nbins), range=(sts.emin, sts.emax))
         plt.pause(delay)

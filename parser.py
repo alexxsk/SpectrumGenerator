@@ -38,7 +38,7 @@ def ParseRange(lst=None):
         elif "emax" in element:
             result[2] = float(element.strip().replace("emax=", ''))
         elif "nch" in element:
-            result[3] = float(element.strip().replace("nch=", ''))
+            result[3] = int(element.strip().replace("nch=", ''))
         elif "time" in element:
             result[4] = float(element.strip().replace("time=", ''))
         else:
