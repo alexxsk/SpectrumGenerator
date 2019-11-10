@@ -8,6 +8,8 @@ What have done:
 
 What should be done:
 ```html
+<p>Some Markdown text with <span style="color:blue">some <em>blue</em> text</span>.</p>
+
 <span style="color:blue">some *This is Blue italic.* text</span>
 !1. Check whether deviations are true or not
 !2. Check whether peaks intensity are true or not
