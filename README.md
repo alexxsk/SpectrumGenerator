@@ -1,11 +1,18 @@
 # EDEM task 1
 
 What have done:
-1. "settings.txt" file **parser module**.
-2. GUI module based on Tkinter. 
-3. Generator module generates spectrum and show it.
+```diff
++1. "settings.txt" file parser module.
++2. GUI module based on Tkinter. 
++3. Generator module generates spectrum and show it.
++4. Added gaus deviation for linear background. 
+```
 
 What should be done:
+```diff
+!1. Check whether deviations are true or not
+!2. Check whether peaks intensity are true or not
+````
 
 __Симуляція (моделювання) апаратурного спектру__
 
