@@ -2,6 +2,7 @@ from tkinter import Tk, Label, Button, Entry, IntVar, END, W, E, StringVar, mess
 import parser as ps
 from generator import Generate
 import pandas as pd
+import tkinter as tk
 
 def generate(filename=None):
     Generate(filename, save="generated.png", draw=True)
@@ -141,7 +142,7 @@ class GUI:
             file.write(f"\nLINE{int(self.enter_number.get())}" + 
                        f" ERG={float(self.enter_energy.get())}" +
                        f" ITS={float(self.enter_intensity.get())}" +
-                       f" FWHM={float(self.enter_fwhm.get())}")
+                       f" FWHM={float(self.enter_fwhm.get())}" + "\n")
             file.close()
 
     def setBkg_to(self):
@@ -155,7 +156,7 @@ class GUI:
                        f" EP1={float(self.enter_first_exp.get())}" +
                        f" EP2={float(self.enter_second_exp.get())}" +
                        f" A={float(self.enter_first_lin.get())}" +
-                       f" B={float(self.enter_second_lin.get())}")
+                       f" B={float(self.enter_second_lin.get())}" + "\n")
             file.close()
 
     def setRange_to(self):
@@ -168,7 +169,7 @@ class GUI:
             file.write(f"\nRANGE" + 
                        f" EMIN={float(self.enter_emin.get())}" +
                        f" EMAX={float(self.enter_emax.get())}" +
-                       f" A={float(self.enter_nachan.get())}")
+                       f" A={float(self.enter_nachan.get())}" + "\n")
             file.close()
 
 def StartGui():
