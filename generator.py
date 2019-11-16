@@ -14,6 +14,14 @@ def gaussian(x, amplitude, sigma, mean):
   return amplitude*np.exp(-np.power(x - mean, 2.) / 
     (2 * np.power(sigma, 2.)))
 
+def statical_distr(y):
+    for i in range(len(y)):
+        if y[i] > 10:
+            y[i] = np.random.poisson(y[i], 1)
+        else:
+            y[i] = np.random.normal(y[i], np.sqrt(y[i]),1)
+    return y
+
 def Generate(filename=None, delay=None, draw=False, save=None):
     if filename == '' or filename == 'None' or filename is None:
         raise Exception("Filename is wrong")
@@ -32,7 +40,7 @@ def Generate(filename=None, delay=None, draw=False, save=None):
 
     x = np.linspace(sts.emin, sts.emax, sts.nbins)
     y = linearFunction(x, sts.bkg_a, sts.bkg_b)
-    temp_y = y + np.random.randn(sts.nbins)*50
+    temp_y = statical_distr(y)
 
     y = [i if i > 0 else i*0 for i in temp_y]
     counts, bins = np.histogram(x, weights=y, bins=int(sts.nbins), range=(sts.emin, sts.emax))
@@ -50,6 +58,7 @@ def Generate(filename=None, delay=None, draw=False, save=None):
 
     x = np.linspace(sts.emin, sts.emax, sts.nbins)
     y = expFunction(x, sts.bkg_exp1, sts.bkg_exp2)
+    y = statical_distr()
     counts, bins = np.histogram(x, weights=y, bins=int(sts.nbins), range=(sts.emin, sts.emax))
     if histogram is None:
         histogram = counts, bins
@@ -78,6 +87,7 @@ def Generate(filename=None, delay=None, draw=False, save=None):
 
     if save is not None:
         plt.savefig(save)
+
     if draw:
         plt.show()
     else:

@@ -5,14 +5,14 @@ import pandas as pd
 import tkinter as tk
 
 def generate(filename=None):
-    Generate(filename, save="generated.png", draw=True)
+    Generate(filename, save="generated.png", draw=True, delay=0.1)
 def save_to_csv(filename=None):
     counts, bins = Generate(filename, save="generated.png", draw=False)
     data = pd.DataFrame({'Energy' : bins[:-1], 'Intensity' : counts})
     data.to_csv("spectrum.txt")
 
-def findInFile(filename=None, text=None):
-    file = open(filename, "r+")
+def find_in_file(filename=None, text=None):
+    file = open(filename, "r")
     for line in file:
         if text in line:
             file.close()
@@ -30,7 +30,7 @@ class GUI:
         self.label = Label(master, text="Output File:")
 
         self.add_line_button = Button(master, text="Add LINE", 
-            command=self.addLine_to)
+            command=self.add_line_to)
 
         self.number_label = Label(master, text="Number: ")
         self.enter_number = Entry()
@@ -42,7 +42,7 @@ class GUI:
         self.enter_fwhm = Entry()
 
         self.add_bkg_button = Button(master, text=" SET BKG", 
-            command=self.setBkg_to)
+            command=self.set_bkg_to)
 
         self.first_lin_label = Label(master, text="First linear coef.:")
         self.enter_first_lin = Entry()
@@ -56,7 +56,7 @@ class GUI:
 
 
         self.add_range_button = Button(master, text="SET RANGE", 
-            command=self.setRange_to)
+            command=self.set_range_to)
 
         self.emin_label = Label(master, text="Emin:")
         self.enter_emin = Entry()
@@ -73,7 +73,7 @@ class GUI:
         self.file_label = Label(master, text="Filename:")
         self.enter_file = Entry()
         self.set_file_button = Button(master, text="Set File", 
-            command=lambda: self.setFile(str(self.enter_file.get())))
+            command=lambda: self.set_file(str(self.enter_file.get())))
 
         self.run_button = Button(master, text=" RUN!", bg='red', 
             command=lambda: generate(self.FILENAME))
@@ -126,32 +126,32 @@ class GUI:
         self.import_button.grid(row=7, column=4)
 
         # self.reset_button.grid(row=2, column=2, sticky=W+E)
-    def setFile(self, new_filename=None):
+    def set_file(self, new_filename=None):
         if new_filename != '':
             self.FILENAME = new_filename
         self.current_filename.set(self.FILENAME)
         self.enter_file.delete(0, END)
 
-    def addLine_to(self):
-        if findInFile(filename=self.FILENAME,
+    def add_line_to(self):
+        if find_in_file(filename=self.FILENAME,
             text=f"LINE{int(self.enter_number.get())}"):
             tk.messagebox.showinfo("GUI Python", 
                 f"Line {int(self.enter_number.get())} already exist")
         else:
-            file = open(self.FILENAME, "a+")
+            file = open(self.FILENAME, "a")
             file.write(f"\nLINE{int(self.enter_number.get())}" + 
                        f" ERG={float(self.enter_energy.get())}" +
                        f" ITS={float(self.enter_intensity.get())}" +
                        f" FWHM={float(self.enter_fwhm.get())}" + "\n")
             file.close()
 
-    def setBkg_to(self):
-        if findInFile(filename=self.FILENAME,
+    def set_bkg_to(self):
+        if find_in_file(filename=self.FILENAME,
             text=f"BKG"):
             tk.messagebox.showinfo("GUI Python", 
                 f"Background already set")
         else:
-            file = open(self.FILENAME, "a+")
+            file = open(self.FILENAME, "a")
             file.write(f"\nBKG" + 
                        f" EP1={float(self.enter_first_exp.get())}" +
                        f" EP2={float(self.enter_second_exp.get())}" +
@@ -159,20 +159,20 @@ class GUI:
                        f" B={float(self.enter_second_lin.get())}" + "\n")
             file.close()
 
-    def setRange_to(self):
-        if findInFile(filename=self.FILENAME,
+    def set_range_to(self):
+        if find_in_file(filename=self.FILENAME,
             text=f"RANGE"):
             tk.messagebox.showinfo("GUI Python", 
                 f"Range already set")
         else:
-            file = open(self.FILENAME, "a+")
+            file = open(self.FILENAME, "a")
             file.write(f"\nRANGE" + 
                        f" EMIN={float(self.enter_emin.get())}" +
                        f" EMAX={float(self.enter_emax.get())}" +
-                       f" A={float(self.enter_nachan.get())}" + "\n")
+                       f" NCH={int(self.enter_nachan.get())}" + "\n")
             file.close()
 
-def StartGui():
+def start_gui():
     root = Tk()
     my_gui = GUI(root)
     root.mainloop()

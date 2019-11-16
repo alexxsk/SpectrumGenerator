@@ -1,7 +1,9 @@
-#
-# Parser for settings file
-#
-def ParseLine(lst=None):
+"""
+Parser for settings files
+It parse LINE, BKG and RANGE strings in file
+
+"""
+def parse_line(lst=None):
     result = [lst[0],0.,0.,0.]
     for element in lst[1:]:
         if "erg" in element:
@@ -14,7 +16,7 @@ def ParseLine(lst=None):
           raise NameError("unknown indetifier")
     return result
 
-def ParseBkg(lst=None):
+def parse_bkg(lst=None):
     result = [lst[0],0.,0.,0.,0.]
     for element in lst[1:]:
         if "ep1" in element:
@@ -30,7 +32,7 @@ def ParseBkg(lst=None):
           raise NameError("unknown indetifier")
     return result
 
-def ParseRange(lst=None):
+def parse_range(lst=None):
     result = ['range',0.,0.,0.,0]
     for element in lst[1:]:
         if "emin" in element:
@@ -49,11 +51,11 @@ def Parse(line=None):
     lst = line[:line.find("#")].lower().rstrip().split()
     if lst == []: return None
     if "line" in lst[0]:
-        return ParseLine(lst)
+        return parse_line(lst)
     if "bkg" in lst[0]:
-        return ParseBkg(lst)
+        return parse_bkg(lst)
     elif "range" in lst[0]:
-        return ParseRange(lst)
+        return parse_range(lst)
     else:
       raise ValueError("Setting file contain else variables!")
 class LineParameters(object):
