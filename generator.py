@@ -22,8 +22,6 @@ def non_minus(function):
             return function(*args, **kwargs)
     return decorator
 
-
-
 def linear_function(x, a=0, b=0):
     """
     First order poly function for backgroud
@@ -35,6 +33,9 @@ def linear_function(x, a=0, b=0):
 
     """
     return a*x + b
+
+def get_sigma(E, a, b):
+    return linear_function(np.sqrt(E), a, b)/2.355
 
 def exponential_function(x, a=0, b=0):
     """
@@ -116,7 +117,7 @@ class Generator(object):
     def take_closest(self, num):
        return min(self.x,key=lambda x:abs(x-num))
 
-    def generate_peaks_with_extension(self):
+    def generate_peaks_with_custom_extension(self):
         """
         Method returns array with generated peaks only with 
         FWHM and statistical deviations
@@ -129,7 +130,22 @@ class Generator(object):
         for line in self.sts.lines:
             result += gaussian_function(self.x, line.intensity,
                                         line.sigma, line.energy)
-        return [statistical_scatter(i) for i in result]
+        return result
+
+    def generate_peaks_with_extension(self, a=1, b=0):
+        """
+        Method returns array with generated peaks only with 
+        FWHM and statistical deviations
+
+        @params:
+            -
+
+        """
+        result = np.zeros(shape=self.sts.nbins)
+        for line in self.sts.lines:
+            result += gaussian_function(self.x, line.intensity,
+                                        get_sigma(line.energy, a, b), line.energy)
+        return result
 
     def generate_peaks_without_extension(self):
         """
