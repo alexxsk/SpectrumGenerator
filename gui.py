@@ -1,4 +1,4 @@
-from tkinter import Tk, Label, Button, Entry, IntVar, END, W, E, StringVar, messagebox 
+from tkinter import Tk, Label, Button, Entry, IntVar, END, W, E, StringVar, messagebox, filedialog
 import parser as ps
 import generator as gn
 import pandas as pd
@@ -6,6 +6,7 @@ import tkinter as tk
 import matplotlib.pyplot as plt
 import seaborn as sns
 import b2plot as bp
+import os
 
 plt.style.use('belle2') 
 
@@ -37,6 +38,9 @@ class GUI:
         self.enter_intensity = Entry()
         self.fwhm_label = Label(master, text="FWHM:")
         self.enter_fwhm = Entry()
+
+        self.browse_button = Button(master, text="BROWSE", 
+                                    command=self.get_browse)
 
         self.add_bkg_button = Button(master, text=" SET BKG", 
             command=self.set_bkg_to)
@@ -70,13 +74,13 @@ class GUI:
 
         self.current_filename = StringVar()
         self.current_filename.set(self.FILENAME)
-        self.current_filename_label_text = Label(master, text="Current filename:")
+        self.current_filename_label_text = Label(master, text="Current file:")
         self.current_filename_label = Label(master, textvariable=self.current_filename)
 
         self.file_label = Label(master, text="Filename:")
         self.enter_file = Entry()
-        self.set_file_button = Button(master, text="Set File", 
-            command=lambda: self.set_file(str(self.enter_file.get())))
+        # self.set_file_button = Button(master, text="Set File", 
+        #     command=lambda: self.set_file(str(self.enter_file.get())))
 
         self.data =[("S(0)",1),("S(0)+B",2),("S(1)+B",3),
                   ("S(2)+B",4),("S(1)+B+D",5),("S(2)+B+D",6)]
@@ -93,7 +97,6 @@ class GUI:
                                     bg='green', 
                                     command=lambda: self.save_to_csv(self.v.get()))
 
-        
         self.add_line_button.grid(row=1, column=0)
         self.number_label.grid(row=0, column=1, sticky=W)
         self.enter_number.grid(row=1, column=1, columnspan=2, sticky=W+E)
@@ -128,15 +131,16 @@ class GUI:
         self.nchan_label.grid(row=4, column=3, sticky=W)
         self.enter_nachan.grid(row=5, column=3, sticky=W+E)
 
-        self.set_file_button.grid(row=7, column=0)
-        self.file_label.grid(row=6, column=1, sticky=W)
-        self.enter_file.grid(row=7, column=1, sticky=W)
+        # self.set_file_button.grid(row=7, column=0)
+        # self.file_label.grid(row=6, column=1, sticky=W)
+        # self.enter_file.grid(row=7, column=1, sticky=W)
 
-        self.current_filename_label_text.grid(row=6, column=2)
-        self.current_filename_label.grid(row=7, column=2)
+        # self.current_filename_label_text.grid(row=7, column=0)
+        # self.current_filename_label.grid(row=7, column=1)
 
-        self.run_button.grid(row=7, column=3)
-        self.import_button.grid(row=7, column=4)
+        self.browse_button.grid(row=6, column=1)
+        self.run_button.grid(row=6, column=2)
+        self.import_button.grid(row=6, column=3)
 
 
         self.label_a.grid(row=4, column=6, sticky=W+E)
@@ -144,13 +148,23 @@ class GUI:
         self.enter_a.grid(row=5, column=6, sticky=W+E)
         self.enter_b.grid(row=7, column=6, sticky=W+E)
 
-    def set_file(self, new_filename=None):
-        if new_filename != '':
-            self.FILENAME = new_filename
-        self.current_filename.set(self.FILENAME)
-        self.enter_file.delete(0, END)
+    def get_browse(self):
+        self.FILENAME =  filedialog.askopenfilename(initialdir = "./",
+                                                    title = "Select file",
+                                            filetypes = (("txt files","*.txt"),
+                                                         ("all files","*.*")))
+        self.current_filename.set(f".../{os.path.basename(self.FILENAME)}")
+
+    def check_file_set(self):
+        if self.FILENAME == 'NONE':
+            tk.messagebox.showinfo("GUI Python", 
+                                   "file isn't set")
+            return False
+        return True
+            
 
     def add_line_to(self):
+        if not self.check_file_set(): return 
         if find_in_file(filename=self.FILENAME,
             text=f"LINE{int(self.enter_number.get())}"):
             tk.messagebox.showinfo("GUI Python", 
@@ -170,6 +184,7 @@ class GUI:
             file.close()
 
     def set_bkg_to(self):
+        if not self.check_file_set(): return 
         if find_in_file(filename=self.FILENAME,
             text=f"BKG"):
             tk.messagebox.showinfo("GUI Python", 
@@ -190,6 +205,7 @@ class GUI:
             file.close()
 
     def set_range_to(self):
+        if not self.check_file_set(): return 
         if find_in_file(filename=self.FILENAME,
             text=f"RANGE"):
             tk.messagebox.showinfo("GUI Python", 
@@ -208,6 +224,7 @@ class GUI:
             file.close()
 
     def generate(self, cmd=""):
+        if not self.check_file_set(): return 
         if cmd == "":
             tk.messagebox.showinfo("GUI Python", 
                                    "There is nothing to build")
@@ -247,6 +264,7 @@ class GUI:
             return (x, y)
 
     def save_to_csv(self, cmd=""):
+        if not self.check_file_set(): return 
         x,y = self.generate(cmd)
         data = pd.DataFrame({'Energy' : x, 'Intensity' : y})
         data.to_csv("spectrum.txt")
