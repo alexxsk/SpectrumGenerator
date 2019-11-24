@@ -10,8 +10,8 @@ What have done:
 
 What should be done:
 ```diff
-!1. Check whether deviations are true or not
-!2. Check whether peaks intensity are true or not
++1. Check whether deviations are true or not
++2. Check whether peaks intensity are true or not
 ````
 
 __Симуляція (моделювання) апаратурного спектру__
