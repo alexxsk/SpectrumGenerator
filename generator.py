@@ -12,7 +12,7 @@ import parser as ps
 
 def non_minus(function):
     """
-    Decorator is made spectrum without < 0 values
+    Decorator do spectrum without < 0 values
 
     """
     def decorator(*args, **kwargs):
