@@ -1,6 +1,6 @@
 # EDEM task 1
 
-What have done:
+What I have done:
 ```diff
 +1. "settings.txt" file parser module.
 +2. GUI module based on Tkinter. 
