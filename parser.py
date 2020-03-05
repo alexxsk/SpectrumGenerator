@@ -1,6 +1,6 @@
 """
-Parser for settings files
-It parse LINE, BKG and RANGE strings in file
+Pretty silly parser for settings files based on 
+IF/ELSE statements (but actually it works really good)
 
 """
 def parse_line(lst=None):
