@@ -13,6 +13,7 @@ What should be done:
 +1. Check whether deviations are true or not
 +2. Check whether peaks intensity are true or not
 ````
+__Here is a description in Ukrainian__
 
 __Симуляція (моделювання) апаратурного спектру__
 
