@@ -7,7 +7,7 @@ from probfit import gen_toy, gaussian, exponential, linear, AddPdfNorm, \
                     Normalized, describe
 import matplotlib.pyplot as plt
 
-# There is pdf's with background and signal
+# There are pdf's with background and signal
 bound = (0, 10)
 signalpdf = Normalized(gaussian, bound)
 bgpdf1 = Normalized(linear, bound)
