@@ -1,3 +1,7 @@
+"""
+Just a bunch of buttons and other stuff
+
+"""
 from tkinter import Tk, Label, Button, Entry, IntVar, END, W, E, StringVar, messagebox, filedialog
 import parser as ps
 import generator as gn
