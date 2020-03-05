@@ -1,6 +1,7 @@
 """  
 The spectrum generator is a core of this program, it generates
-different type of spectrum:
+different types of spectrum:
+
   1. Peaks with or without extention (with or without FWHM)
   2. Background spectrum that consist of exponential
      and linear parts with or without statistical deviations
