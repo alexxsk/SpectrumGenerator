@@ -4,7 +4,7 @@ different type of spectrum:
   1. Peaks with or without extention (with or without FWHM)
   2. Background spectrum that consist of exponential
      and linear parts with or without statistical deviations
-  3. Total spectrum with or without statistical debiations
+  3. Total spectrum with or without statistical deviations
 
 """
 import numpy as np
