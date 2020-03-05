@@ -1,6 +1,5 @@
 """
-Example with spectrum generator based on response function
-creating and than toy monte carlo in it. 
+Example with the spectrum generator based on creating response function and than toy monte carlo. 
 
 """
 from probfit import gen_toy, gaussian, exponential, linear, AddPdfNorm, \
