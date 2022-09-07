@@ -1,43 +1,7 @@
-# EDEM task 1
+## The software was made for the generation of different device spectrums for further analysis.
 
-What I have done:
-```diff
-+1. "settings.txt" file parser module.
-+2. GUI module based on Tkinter. 
-+3. Generator module generates spectrum and show it.
-+4. Added gaus deviation for linear background. 
-```
+Functionality includes:
 
-What should be done:
-```diff
-+1. Check whether deviations are true or not
-+2. Check whether peaks intensity are true or not
-````
-## Here is a description in Ukrainian
-
-__Симуляція (моделювання) апаратурного спектру__
-
-_1. Задати з файлу (чи за вибором викладача в програмі):_
-- лінії, які будуть присутні в спектрі (їх характеристики – енергія, інтенсивність, ширина на половині висоти ΔE в апаратурному спектрі). В файлі необхідно забезпечити написання коментарів у будь-якому рядку, а також значення змінних не повинні прив’язуватися до номеру рядку. На всі
-змінні повинні бути коментарі – що це, і можливий діапазон зміни значень. Ліній можна задавати необмежену кількість.
-- Задати параметри фону: складається із суми спадаючої експоненти та лінійного фону (2 + 2 параметри).
-- Задати вхідний досліджуваний енергетичний діапазон (від 0 до Emax), кількість каналів спектру та початковий зсув (E0 при нульовому номері каналу).
-
-_2. Сформувати (також може виводиться зображення на кожному етапі – задається у конфігураційному файлі, як і в п.1):_
-- Вхідний (фізичний) спектр без фону і без уширення піків (також виводиться зображення)
-- Вхідний (фізичний) спектр з фоном без уширення піків (також виводиться зображення)
-- Апаратурний спектр з фоном з уширенням піків без статистичного розкиду в каналах. Уширення проводити за такими алгоритмами (опціональний вибір через вхідні параметри – не програміста, а викладача чи користувача)
-  - ΔE використовується із даних 1 пункту
-  - ΔE = a0 + a1\*sqrt(E) (поясніть, чому використовують таку залежність), a0, a1 – параметри.
-
-- Апаратурний спектр з фоном з уширенням піків із статистичним розкидом в каналах:
-  - згідно закону Пуассона;
-  - при значеннях в каналі менше 10 розкид згідно закону Пуассона, при значеннях більше 10 апроксимувати гауссівським наближенням із sigma = sqrt(N) , де N – кількість відліків в каналі.
-
-_3. Вивести спектри, сформовані в попередньому пункті в файл і в графічному
-вигляді._
-
-_4. Протестувати та проаналізувати отримані результати (варіюючи параметри і
-досліджуючи результуючі спектри)._
-
-_5. Вивести залежність sigma від ΔE (FWHM, ПШПВ) для розподілу Гаусса (необхідне при симуляції)._
+- GUI (Tkinter) where you can set spectrum characteristics like energy, intensity, FWHM (resolution), and background. It is also possible to set variables via the settings file (comments support included).
+- File with the generated spectrum includes spectrum peaks (Gaussians) with given resolution and background simulation based on statistical scattering according to Poisson distribution if the number of events in the channel is less than 10, and Gaussian approximation if the number of events is greater then 10 (sigma = sqrt(N), where N is a counts number in a channel).
+- Graphical interpretation of a spectrum also shows.
